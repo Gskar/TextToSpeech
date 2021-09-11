@@ -1,16 +1,25 @@
 const btn = document.querySelector(".talk");
 const content = document.querySelector(".content");
-
-// Array
-const greetings = ["Im good you little bitch", "Piss Off"];
+const repeatBtn = document.querySelector("#repeatbtn");
+let active = false;
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
 const recognition = new SpeechRecognition();
 
+repeatBtn.addEventListener("click", () => {
+  if (active === false) {
+    repeatBtn.textContent = "Voice Repeat is Active";
+    active = true;
+  } else if (active === true) {
+    repeatBtn.textContent = "Voice Repeat is Inactive";
+    active = false;
+  }
+});
+
 recognition.onstart = function () {
-  console.log("Voice is On");
+  document.querySelector("h4").textContent = "Voice Is On";
 };
 
 recognition.onresult = function (event) {
@@ -27,16 +36,18 @@ btn.addEventListener("click", () => {
 
 function readOutLoud(message) {
   const speech = new SpeechSynthesisUtterance();
-
-  if (message.includes("how are you")) {
-    const finalText = greetings[Math.floor(Math.random() * greetings.length)];
-    speech.text = finalText;
+  if (active === false) {
+    speech.volume = 1;
+    speech.rate = 1;
+    speech.pitch = 1;
+    document.querySelector("h4").textContent = "Voice Is Off";
+    window.speechSynthesis.speak(speech);
+  } else {
+    speech.text = message;
+    speech.volume = 1;
+    speech.rate = 1;
+    speech.pitch = 1;
+    document.querySelector("h4").textContent = "Voice Is Off";
+    window.speechSynthesis.speak(speech);
   }
-
-  //   speech.text = message;
-  speech.volume = 1;
-  speech.rate = 1;
-  speech.pitch = 1;
-
-  window.speechSynthesis.speak(speech);
 }
