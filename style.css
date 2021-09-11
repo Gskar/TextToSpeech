@@ -5,7 +5,7 @@
 }
 
 body {
-  background: #233;
+  background: #222;
   height: 100vh;
   display: grid;
   place-items: center;
@@ -25,10 +25,33 @@ body {
   padding: 0.7em 1em;
   cursor: pointer;
   border: none;
+  margin: 2rem 0;
   background: none;
+  opacity: 0.75;
+}
+
+.talk:hover {
+  opacity: 1;
+}
+
+h2 {
+  padding: 2em 0;
+  color: #fff;
+}
+
+h4 {
+  color: orangered;
+  padding: 1rem 0;
+}
+
+#repeatbtn {
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  color: orangered;
 }
 
 .content {
   font-size: 4rem;
-  color: white;
+  color: orange;
 }
+
